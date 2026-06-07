@@ -1,0 +1,23 @@
+{
+  "timeZone": "Asia/Jakarta",
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "Drive",
+        "serviceId": "drive",
+        "version": "v2"
+      },
+      {
+        "userSymbol": "Spreadsheet",
+        "serviceId": "sheets",
+        "version": "v4"
+      }
+    ]
+  },
+  "exceptionLogging": "LOGGING",
+  "runtimeVersion": "V8",
+  "webapp": {
+    "access": "ANYONE_ANONYMOUS",
+    "execute": "asAnonymousUser"
+  }
+}
