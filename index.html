@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pencatatan Reject — Produksi Aksara Buana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="utility-bar">
+            <span>PRODUKSI AKSARA BUANA</span>
+            <span>Quality Control & Production Monitoring</span>
+        </div>
+        <div class="primary-nav">
+            <div class="nav-brand">
+                <div class="corner-sq"></div>
+                <span class="brand-name">Form Pencatatan Reject</span>
+            </div>
+            <span class="nav-year">2026</span>
+        </div>
+        <div class="breadcrumb">
+            <span>Produksi</span>
+            <span class="sep">›</span>
+            <span class="bc-active">Pencatatan Reject</span>
+        </div>
+    </header>
+
+    <!-- Body -->
+    <main class="body-wrap">
+
+        <!-- Page Title -->
+        <div class="page-title">
+            <div>
+                <span class="eyebrow">Form Input Data</span>
+                <h1>Pencatatan Reject Produksi</h1>
+            </div>
+            <span class="page-hint">Isi semua field yang wajib diisi</span>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert"></div>
+
+        <form id="rejectForm">
+            <!-- Grid Layout -->
+            <div class="form-grid">
+
+                <!-- Left Column -->
+                <div class="col-left">
+
+                    <!-- Card: Info Dasar -->
+                    <div class="card">
+                        <div class="corner-sq card-corner"></div>
+                        <div class="card-header">
+                            <span class="step-label">Langkah 1</span>
+                            <span class="card-title">Informasi Dasar</span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tanggal">Tanggal</label>
+                                <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jam">Jam</label>
+                                <input type="time" id="jam" name="jam" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kodeOrder">Kode Order / Nama Job</label>
+                            <input type="text" id="kodeOrder" name="kodeOrder" class="form-control" placeholder="Contoh: AB-2026-001" required>
+                        </div>
+                    </div>
+
+                    <!-- Card: Pilih POS -->
+                    <div class="card">
+                        <div class="corner-sq card-corner"></div>
+                        <div class="card-header">
+                            <span class="step-label">Langkah 2</span>
+                            <span class="card-title">Pilih POS</span>
+                        </div>
+                        <div id="posSelection" class="pos-selection"></div>
+                        <p class="field-hint">Pilih satu atau lebih POS yang akan dicatat</p>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Dynamic POS Sections -->
+                <div class="col-right" id="posSectionsContainer"></div>
+
+            </div>
+
+            <!-- Submit Bar -->
+            <div class="submit-bar">
+                <div class="submit-info">
+                    <span id="submitSummary">Pilih POS untuk mulai mengisi data</span>
+                </div>
+                <div class="submit-actions">
+                    <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+                    <button type="submit" class="btn-submit">Simpan Data →</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span>© 2026 Produksi Aksara Buana — Form Pencatatan Reject</span>
+        <div class="footer-credit">
+            <div class="corner-sq footer-sq"></div>
+            <span>Built with <strong>♥ bhann-Kiro</strong></span>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/form.html" },
     { "source": "/submit", "destination": "/api/submit" }
   ]
 }
