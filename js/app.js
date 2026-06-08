@@ -80,7 +80,6 @@ function createPOSSection(posName) {
         <div class="reject-table-head">
             <span>Kategori Reject${isComplete ? ' & Halaman' : ''}</span>
             <span>Jumlah</span>
-            <span>Aksi</span>
         </div>
 
         <div id="rejectRows-${sectionId}">
@@ -131,16 +130,22 @@ function removePOSSection(posName) {
 }
 
 function buildRejectRow(posName, categories, isComplete) {
-    const halCol = isComplete ? `<input type="text" name="halaman[${posName}][]" placeholder="Halaman">` : '';
+    const halCol = isComplete ? `<input type="text" name="halaman[${posName}][]" placeholder="Halaman" class="halaman-input">` : '';
     return `<div class="reject-row">
+        <button type="button" class="btn-remove-trash" onclick="removeRejectRow(this)" title="Hapus">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        </button>
         <select name="kategori[${posName}][]">
             <option value="">Pilih Kategori</option>
             ${categories.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
             <option value="__custom__">+ Tambah Kategori Baru</option>
         </select>
-        <input type="number" name="jumlah[${posName}][]" placeholder="Jumlah" min="0" value="0">
+        <div class="stepper">
+            <button type="button" class="stepper-btn" onclick="stepperChange(this,-1)">−</button>
+            <input type="number" name="jumlah[${posName}][]" min="0" value="0">
+            <button type="button" class="stepper-btn" onclick="stepperChange(this,1)">+</button>
+        </div>
         ${halCol}
-        <button type="button" class="btn-remove" onclick="removeRejectRow(this)">Hapus</button>
     </div>`;
 }
 
@@ -199,18 +204,16 @@ function handleCustomCategory(selectElement, posName) {
         const allSelects = section.querySelectorAll(`select[name^="kategori[${posName}]"]`);
         
         allSelects.forEach(select => {
-            // Remove existing custom option and re-add
+            // Add new option before the custom option (semua select dapat option baru)
             const customOption = select.querySelector('option[value="__custom__"]');
-            
-            // Add new category before the custom option
             const newOption = document.createElement('option');
             newOption.value = newCategory;
             newOption.textContent = newCategory;
             select.insertBefore(newOption, customOption);
-            
-            // Select the new category
-            select.value = newCategory;
         });
+
+        // Hanya set value pada select yang sedang aktif (yang memicu prompt)
+        selectElement.value = newCategory;
     } else {
         selectElement.value = '';
     }
@@ -392,8 +395,16 @@ function showAlert(message, type) {
     console.log('Alert:', type, message);
 }
 
+function stepperChange(btn, delta) {
+    const input = btn.closest('.stepper').querySelector('input[type="number"]');
+    const next = Math.max(0, (parseInt(input.value) || 0) + delta);
+    input.value = next;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
 // Make functions globally available
 window.togglePOS = togglePOS;
 window.addRejectRow = addRejectRow;
 window.removeRejectRow = removeRejectRow;
 window.handleCustomCategory = handleCustomCategory;
+window.stepperChange = stepperChange;
